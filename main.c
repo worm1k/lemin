@@ -14,6 +14,6 @@
 
 int		main()
 {
-	ft_putstr("suka!\n");
+	read_data();
 	return (0);
 }

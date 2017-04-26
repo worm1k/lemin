@@ -23,7 +23,8 @@ INC_PATH = .
 OBJ_PATH = .
 LIB_PATH = libft
 
-SRC_NAME =	main.c 
+SRC_NAME =	main.c \
+			read_data.c \
 
 INC_NAME = e.h
 

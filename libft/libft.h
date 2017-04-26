@@ -95,5 +95,7 @@ typedef struct		s_lst
 	int				fd;
 }					t_lst;
 int					get_next_line(const int fd, char **line);
+int					get_next_line_nbr(const int fd, char **line);
+
 
 #endif
