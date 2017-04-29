@@ -19,6 +19,7 @@
 # define COMMAND 1
 # define ROOM 2
 # define JOIN 3
+# define ANTNUM 4
 
 typedef struct		s_vert
 {
@@ -47,4 +48,5 @@ typedef struct		s_line
 
 void				read_data();
 int					isvalid(char **split);
+int					line_type(char *line);
 #endif

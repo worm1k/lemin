@@ -25,6 +25,7 @@ LIB_PATH = libft
 
 SRC_NAME =	main.c \
 			read_data.c \
+			line_type.c
 
 INC_NAME = e.h
 

@@ -12,69 +12,6 @@
 
 #include "lemin.h"
 
-// # define UNKNOWN -1
-// # define COMMENT 0
-// # define COMMAND 1
-// # define ROOM 2
-// # define JOIN 3
-
-static int	isjoin(char *str)
-{
-
-}
-
-static int	isroom(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] == ' ')
-		i++;
-	while (ft_isprint(str[i]) && str[i] != '#' && str[i] != 'L')
-		i++;
-	if (str[i++] != ' ')
-		return (0);
-	while (ft_isdigit(str[i]))
-		i++;
-	if (str[i++] != ' ')
-		return (0);
-	while (ft_isdigit(str[i]))
-		i++;
-	while (str[i] == ' ')
-		i++;
-	if (str[i] != '\0')
-		return (0);
-	return (1);
-}
-
-static int	line_type(char *line)
-{
-	printf("type of [%20s]", line);
-	if (line[0] == '#' && line[1] == '#')
-	{
-		printf(" is COMMAND\n");
-		return (COMMAND);
-	}
-	else if (line[0] == '#')
-	{
-		printf(" is COMMENT\n");
-		return (COMMENT);
-	}
-	else if (isroom(line))
-	{
-		printf(" is ROOM\n");
-		return (ROOM);
-	}
-	else if (isjoin(line))
-	{
-		printf(" is JOIN\n");
-		return (JOIN);
-	}
-
-	printf(" is UNKOWN\n");
-	return (UNKNOWN);
-}
-
 static void	read_input(t_graph *head)
 {
 	char	*temp;
