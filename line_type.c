@@ -46,12 +46,12 @@ static int	isjoin(char *str)
 		i++;
 	if (str[i++] != '-')
 		return (0);
+	j = i;
 	if (ft_isprint(str[i]) && str[i] != ' ' && str[i] != '#' 
 		&& str[i] != 'L' && str[i] != '-')
 		i++;
 	else
 		return (0);
-	j = i;
 	while (ft_isprint(str[i]) && str[i] != ' ' && str[i] != '-')
 		i++;
 	if (str[i] != '\0' || j == i)
@@ -116,5 +116,6 @@ int			line_type(char *line)
 	}
 
 	printf(" is UNKOWN\n");
+	exit(0);
 	return (UNKNOWN);
 }

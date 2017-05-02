@@ -21,21 +21,20 @@
 # define JOIN 3
 # define ANTNUM 4
 
-typedef struct		s_vert
+typedef struct		s_rooms
 {
-	int				number;
 	char			*name;
 	int				x;
 	int				y;
-	int				is_start;
-	int				is_end;
-}					t_vert;
+	struct s_rooms	*next;
+}					t_rooms;
 
-typedef struct		s_graph
+typedef	struct		s_joins
 {
-	t_vert			*vert;
-	struct s_graph	*next;
-}					t_graph;
+	char			*name1;
+	char			*name2;
+	struct s_joins	*next;
+}					t_joins;
 
 typedef struct		s_line
 {
@@ -45,8 +44,23 @@ typedef struct		s_line
 	int				x;
 	int				y;
 }					t_line;
+typedef struct		s_data
+{
+	int				antnum;
+	int				roomsnum;
+	t_rooms			*rooms;
+	t_joins			*joins;
+	char			**names;
+	char			*command;
+}					t_data;
 
 void				read_data();
+void				data_init(t_data **data);
 int					isvalid(char **split);
 int					line_type(char *line);
+void				exit_error(int n);
+void				add_command(t_data *data, char *str);
+void				add_room(t_data *data, char *str);
+void				add_names(t_data *data);
+void				add_join(t_data *data, char *str);
 #endif
