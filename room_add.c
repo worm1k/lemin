@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   room_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,33 @@
 
 #include "lemin.h"
 
-int		main()
+static void	room_check(t_rooms *head, t_rooms *room)
 {
-	g_n = 1;
-	read_data();
-	return (0);
+	t_rooms	*curr;
+
+	curr = head;
+	while (curr)
+	{
+		if (ft_strequ(curr->name, room->name)
+			|| (curr->x == room->x && curr->y == room->y))
+			exit_error(g_n);
+		curr = curr->next;
+	}
+}
+
+void		room_add_front(t_rooms **head, t_rooms *room)
+{
+	t_rooms	*temp;
+
+	room_check(*head, room);
+}
+
+void		room_add_mid(t_rooms *head, t_rooms *room)
+{
+	room_check(head, room);
+}
+
+void		room_add_back(t_rooms *head, t_rooms *room)
+{
+	room_check(head, room);
 }

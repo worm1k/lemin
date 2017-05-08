@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi_extra.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,19 @@
 
 #include "lemin.h"
 
-int		main()
+int		ft_atoi_exit(char *str)
 {
-	g_n = 1;
-	read_data();
-	return (0);
+	int	i;
+	int	res;
+
+	i = 0;
+	res = 0;
+	while (ft_isdigit(str[i]))
+	{
+		if (res > 214748364 || (res == 214748364 && str[i] >= '8'))
+			exit_error(g_n);
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	return (res);
 }

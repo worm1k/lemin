@@ -20,6 +20,7 @@
 # define ROOM 2
 # define JOIN 3
 # define ANTNUM 4
+int					g_n;
 
 typedef struct		s_rooms
 {
@@ -58,9 +59,13 @@ void				read_data();
 void				data_init(t_data **data);
 int					isvalid(char **split);
 int					line_type(char *line);
+int					ft_atoi_exit(char *str);
 void				exit_error(int n);
-void				add_command(t_data *data, char *str);
-void				add_room(t_data *data, char *str);
+char				*add_command(t_data *data, char *str, char *command);
+void				add_room(t_data *data, char *str, char *command);
 void				add_names(t_data *data);
-void				add_join(t_data *data, char *str);
+void				add_join(t_data *data, char *str, char *command);
+void				room_add_front(t_rooms **head, t_rooms *room);
+void				room_add_mid(t_rooms *head, t_rooms *room);
+void				room_add_back(t_rooms *head, t_rooms *room);
 #endif

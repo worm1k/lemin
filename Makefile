@@ -28,9 +28,11 @@ SRC_NAME =	main.c \
 			line_type.c \
 			data_add.c \
 			data_init.c \
-			exit_error.c
+			exit_error.c \
+			ft_atoi_exit.c \
+			room_add.c 
 
-INC_NAME = e.h
+INC_NAME = lemin.h
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -47,7 +49,7 @@ $(NAME): $(OBJ)
 $(LIB):
 	make -C $(LIB_PATH)/
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c  $(INC)
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) -o $@ -c $<
 

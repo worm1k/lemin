@@ -88,34 +88,34 @@ static int	isroom(char *str)
 
 int			line_type(char *line)
 {
-	printf("type of [%15s]", line);
+	// printf("type of [%15s]", line);
 	if (line[0] == '#' && line[1] == '#')
 	{
-		printf(" is COMMAND\n");
+		// printf(" is COMMAND\n");
 		return (COMMAND);
 	}
 	else if (line[0] == '#')
 	{
-		printf(" is COMMENT\n");
+		// printf(" is COMMENT\n");
 		return (COMMENT);
 	}
 	else if (isroom(line))
 	{
-		printf(" is ROOM\n");
+		// printf(" is ROOM\n");
 		return (ROOM);
 	}
 	else if (isjoin(line))
 	{
-		printf(" is JOIN\n");
+		// printf(" is JOIN\n");
 		return (JOIN);
 	}
 	else if (isantnum(line))
 	{
-		printf(" is ANTNUM\n");
+		// printf(" is ANTNUM\n");
 		return (ANTNUM);
 	}
 
-	printf(" is UNKOWN\n");
+	// printf(" is UNKOWN\n");
 	exit(0);
 	return (UNKNOWN);
 }

@@ -22,25 +22,29 @@
 static void		try_add(char *str, int type, t_data *data)
 {
 	static int	curr = 0;
-	static int	n = 1;
+	static char	*command = 0;
 
 	if (type == ANTNUM)
 	{
 		if (curr != 0)
-			exit_error(n);
+			exit_error(g_n);
 		printf("ANTNUM [%s]\n", str);
-		data->antnum = ft_atoi(str);
+		data->antnum = ft_atoi_exit(str);
+		if (data->antnum == 0)
+			exit_error(g_n);
 		curr++;
 	}
 	else if (type == COMMAND)
 	{
-		add_command(data, str);
+		command = add_command(data, str, command);
+		g_n++;
+		return ;
 	}
 	else if (type == ROOM)
 	{
 		if (curr != 1)
-			exit_error(n);
-		add_room(data, str);
+			exit_error(g_n);
+		add_room(data, str, command);
 	}
 	else if (type == JOIN)
 	{
@@ -50,10 +54,18 @@ static void		try_add(char *str, int type, t_data *data)
 			add_names(data);
 		}
 		if (curr != 2)
-			exit_error(n);
-		add_join(data, str);
+			exit_error(g_n);
+		add_join(data, str, command);
 	}
-	n++;
+	else if (type == COMMENT)
+	{
+		printf("Comment [%s]\n", str);
+		if (command != 0)
+			exit_error(g_n);
+	}
+	(command) ? (free(command)) : (0);
+	command = 0;
+	g_n++;
 }
 
 static void	read_input(t_data *data)
