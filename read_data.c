@@ -19,7 +19,7 @@
 // # define JOIN 3
 // # define ANTNUM 4
 
-static void		try_add(char *str, int type, t_data *data)
+static int		try_add(char *str, int type, t_data *data)
 {
 	static int	curr = 0;
 	static char	*command = 0;
@@ -38,7 +38,7 @@ static void		try_add(char *str, int type, t_data *data)
 	{
 		command = add_command(data, str, command);
 		g_n++;
-		return ;
+		return (42);
 	}
 	else if (type == ROOM)
 	{
@@ -66,18 +66,24 @@ static void		try_add(char *str, int type, t_data *data)
 	(command) ? (free(command)) : (0);
 	command = 0;
 	g_n++;
+	return (curr);
 }
 
 static void	read_input(t_data *data)
 {
 	char	*temp;
+	int		step;
 
 	temp = 0;
 	while (get_next_line(0, &temp) > 0)
 	{
-		try_add(temp, line_type(temp), data);
+		step = try_add(temp, line_type(temp), data);
 		(temp) ? free(temp) : 0;
 		temp = 0;
+	}
+	if (step != 2)
+	{
+		exit_error(g_n);
 	}
 }
 

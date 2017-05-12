@@ -30,7 +30,9 @@ SRC_NAME =	main.c \
 			data_init.c \
 			exit_error.c \
 			ft_atoi_exit.c \
-			room_add.c 
+			room_add.c \
+			join_add.c \
+			print_matrix.c
 
 INC_NAME = lemin.h
 

@@ -45,14 +45,17 @@ typedef struct		s_line
 	int				x;
 	int				y;
 }					t_line;
+
 typedef struct		s_data
 {
 	int				antnum;
 	int				roomsnum;
 	t_rooms			*rooms;
 	t_joins			*joins;
+	char			**matrix;
 	char			**names;
-	char			*command;
+	t_rooms			*start;
+	t_rooms			*end;
 }					t_data;
 
 void				read_data();
@@ -65,7 +68,10 @@ char				*add_command(t_data *data, char *str, char *command);
 void				add_room(t_data *data, char *str, char *command);
 void				add_names(t_data *data);
 void				add_join(t_data *data, char *str, char *command);
-void				room_add_front(t_rooms **head, t_rooms *room);
-void				room_add_mid(t_rooms *head, t_rooms *room);
-void				room_add_back(t_rooms *head, t_rooms *room);
+void				room_add_start(t_data *data, t_rooms *room);
+void				room_add_mid(t_data *data, t_rooms *room);
+void				room_add_end(t_data *data, t_rooms *room);
+void				join_add(t_data *data, t_joins *join);
+void				matrix_init(t_data *data);
+void				print_matrix(t_data *data);
 #endif

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_init.c                                        :+:      :+:    :+:   */
+/*   print_matrix.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,28 +12,25 @@
 
 #include "lemin.h"
 
-void	data_init(t_data **data)
-{
-	(*data) = malloc(sizeof(t_data));
-	(*data)->antnum = -1;
-	(*data)->roomsnum = 0;
-	(*data)->rooms = NULL;
-	(*data)->joins = NULL;
-	(*data)->names = NULL;
-	(*data)->start = NULL;
-	(*data)->end = NULL;
-	(*data)->matrix = NULL;
-}
-
-void	matrix_init(t_data *data)
+void	print_matrix(t_data *data)
 {
 	int	i;
+	int	j;
 
-	data->matrix = (char **)malloc(sizeof(char *) * data->roomsnum);
 	i = 0;
+	printf(" ");
 	while (i < data->roomsnum)
 	{
-		data->matrix[i] = ft_strnew(data->roomsnum - 1);
+		printf("|%d", i % 10);
 		i++;
 	}
+	printf("\n");
+	i = 0;
+	printf("-");
+	while (i < data->roomsnum)
+	{
+		printf("+-");
+		i++;
+	}
+	exit(0);
 }

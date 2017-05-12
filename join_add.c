@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_init.c                                        :+:      :+:    :+:   */
+/*   join_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,28 +12,18 @@
 
 #include "lemin.h"
 
-void	data_init(t_data **data)
+void		join_add(t_data *data, t_joins *join)
 {
-	(*data) = malloc(sizeof(t_data));
-	(*data)->antnum = -1;
-	(*data)->roomsnum = 0;
-	(*data)->rooms = NULL;
-	(*data)->joins = NULL;
-	(*data)->names = NULL;
-	(*data)->start = NULL;
-	(*data)->end = NULL;
-	(*data)->matrix = NULL;
-}
+	t_joins	*curr;	
 
-void	matrix_init(t_data *data)
-{
-	int	i;
-
-	data->matrix = (char **)malloc(sizeof(char *) * data->roomsnum);
-	i = 0;
-	while (i < data->roomsnum)
+	if (data->joins == NULL)
+		data->joins = join;
+	else
 	{
-		data->matrix[i] = ft_strnew(data->roomsnum - 1);
-		i++;
+		curr = data->joins;
+		while (curr)
+		{
+			curr = curr->next;
+		}
 	}
 }
