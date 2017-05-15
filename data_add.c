@@ -55,7 +55,6 @@ void		add_names(t_data *data)
 	curr = data->rooms;
 	data->names = (char **)malloc(sizeof(char *) * data->roomsnum);
 	matrix_init(data);
-	print_matrix(data);
 	data->names[0] = ft_strdup(data->start->name);
 	i = 1;
 	while (curr)
@@ -69,16 +68,15 @@ void		add_names(t_data *data)
 
 void		add_join(t_data *data, char *str, char *command)
 {
-	t_joins	*join;
+	char	*join1;
+	char	*join2;
 	char	*str2;
 
-	join = (t_joins *)malloc(sizeof(t_joins));
-	join->name1 = ft_strsub(str, 0, ft_strchr(str, '-') - str);
+	join1 = ft_strsub(str, 0, ft_strchr(str, '-') - str);
 	str2 = ft_strchr(str, '-') + 1;
-	join->name2 = ft_strsub(str2, 0, ft_strlen(str2));
-	join->next = NULL;
-	printf("JOIN [%s]-[%s] [%s]\n", join->name1, join->name2, str);
-	if (ft_strequ(join->name1, join->name2))
+	join2 = ft_strsub(str2, 0, ft_strlen(str2));
+	printf("JOIN [%s]-[%s] [%s]\n", join1, join2, str);
+	if (ft_strequ(join1, join2))
 		exit_error(g_n);
-	join_add(data, join);
+	join_add(data, join1, join2);
 }

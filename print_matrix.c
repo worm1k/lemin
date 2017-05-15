@@ -18,7 +18,7 @@ void	print_matrix(t_data *data)
 	int	j;
 
 	i = 0;
-	printf(" ");
+	printf("  ");
 	while (i < data->roomsnum)
 	{
 		printf("|%d", i % 10);
@@ -26,11 +26,24 @@ void	print_matrix(t_data *data)
 	}
 	printf("\n");
 	i = 0;
-	printf("-");
+	printf("--");
 	while (i < data->roomsnum)
 	{
 		printf("+-");
 		i++;
 	}
-	exit(0);
+	printf("\n");
+	i = 0;
+	while (i < data->roomsnum)
+	{
+		j = 0;
+		printf("%d ", i);
+		while (j < data->roomsnum)
+		{
+			printf(" %d", data->matrix[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 }

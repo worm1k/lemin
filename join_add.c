@@ -12,18 +12,33 @@
 
 #include "lemin.h"
 
-void		join_add(t_data *data, t_joins *join)
+static int	index_of(t_data *data, char *str)
 {
-	t_joins	*curr;	
+	int		res;
 
-	if (data->joins == NULL)
-		data->joins = join;
-	else
+	res = 0;
+	while (res < data->roomsnum)
 	{
-		curr = data->joins;
-		while (curr)
+		if (ft_strequ(str, data->names[res]))
 		{
-			curr = curr->next;
+			printf("INDEX_OF[%s]:[%d]\n", str, res);
+			return (res);
 		}
+		res++;
 	}
+	exit_error(g_n);
+	return (-1);
+}
+
+void		join_add(t_data *data, char *join1, char *join2)
+{
+	int		i;
+	int		j;
+
+	i = index_of(data, join1);
+	j = index_of(data, join2);
+	if (data->matrix[i][j] || data->matrix[j][i])
+		exit_error(g_n);
+	data->matrix[i][j] = 1;
+	data->matrix[j][i] = 1;
 }
