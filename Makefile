@@ -32,7 +32,8 @@ SRC_NAME =	main.c \
 			ft_atoi_exit.c \
 			room_add.c \
 			join_add.c \
-			print_matrix.c
+			print_matrix.c \
+			find_all_paths.c \
 
 INC_NAME = lemin.h
 

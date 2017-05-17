@@ -74,4 +74,5 @@ void				room_add_end(t_data *data, t_rooms *room);
 void				join_add(t_data *data, char *join1, char *join2);
 void				matrix_init(t_data *data);
 void				print_matrix(t_data *data);
+void				find_all_paths(t_data *data);
 #endif

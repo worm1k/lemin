@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_add.c                                         :+:      :+:    :+:   */
+/*   find_all_pathes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,33 +12,39 @@
 
 #include "lemin.h"
 
-static int	index_of(t_data *data, char *str)
+static void	print_path(t_lst *path)
 {
-	int		res;
- 
-	res = 0;
-	while (res < data->roomsnum)
+	if (!path)
+		return ;
+	printf("[%d]", path->fd);
+	path = path->next;
+	while (path)
 	{
-		if (ft_strequ(str, data->names[res]))
-		{
-			printf("INDEX_OF[%s]:[%d]\n", str, res);
-			return (res);
-		}
-		res++;
+		printf(" => [%d]", path->fd);
+		path = path->next;
 	}
-	exit_error(g_n);
-	return (-1);
+	printf("\n");
 }
 
-void		join_add(t_data *data, char *join1, char *join2)
+static int	can_traverse(char **matrix, t_lst *path, int start, int end)
+{
+	return (1);
+}
+
+void		find_all_paths(t_data *data)
 {
 	int		i;
-	int		j;
+	t_lst	*path;
 
-	i = index_of(data, join1);
-	j = index_of(data, join2);
-	if (data->matrix[i][j] || data->matrix[j][i])
-		exit_error(g_n);
-	data->matrix[i][j] = 1;
-	data->matrix[j][i] = 1;
+	path = (t_lst *)malloc(sizeof(t_lst));
+	path = NULL;
+	i = 0;
+	while (i < data->roomsnum)
+	{
+		if (can_traverse(data->matrix, path, 0, data->roomsnum - 1))
+		{
+			print_path(path);
+		}
+		i++;
+	}
 }
