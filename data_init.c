@@ -23,6 +23,7 @@ void	data_init(t_data **data)
 	(*data)->start = NULL;
 	(*data)->end = NULL;
 	(*data)->matrix = NULL;
+	(*data)->paths = NULL;
 }
 
 void	matrix_init(t_data *data)

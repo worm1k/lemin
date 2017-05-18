@@ -47,6 +47,19 @@ typedef struct		s_line
 	int				y;
 }					t_line;
 
+typedef struct 		s_room
+{
+	int 			index;
+	struct s_room	*next;
+}					t_room;
+
+typedef struct 		s_paths
+{
+	int 			len;
+	t_room			*head;
+	struct s_paths	*next;
+}					t_paths;
+
 typedef struct		s_data
 {
 	int				antnum;
@@ -57,6 +70,7 @@ typedef struct		s_data
 	char			**names;
 	t_rooms			*start;
 	t_rooms			*end;
+	t_paths			*paths;
 }					t_data;
 
 void				read_data();

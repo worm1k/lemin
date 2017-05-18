@@ -12,70 +12,39 @@
 
 #include "lemin.h"
 
-static void print_path(t_lst *path)
+static void print_path(t_list *path)
 {
 	if (!path)
 	{
 		return;
 	}
-	printf("[%d]", path->fd);
+	printf("[%zu]", path->content_size);
 	path = path->next;
 	while (path)
 	{
-		printf(" => [%d]", path->fd);
+		printf(" => [%zu]", path->content_size);
 		path = path->next;
 	}
 	printf("\n");
 }
 
-static int can_traverse(char **matrix, t_lst **path, int start, int roomsnum
-						, char *visited)
+static int	can_traverse(char **matrix, int start, char *visited, int n, t_list **path)
 {
-	int		i;
-	t_lst	*lsnew;
+	int		j;
+	t_list	*temp;
 
-	printf("check [%d]" ,start);
-	i = 0;
-	visited[start] = 1;
-	while (i < roomsnum - 1)
-	{
-		if (matrix[start][i] && !visited[i])
-		{
-			if (can_traverse(matrix, path, i, roomsnum, visited))
-			{
-				lsnew = (t_lst *) malloc(sizeof(t_lst));
-				lsnew->fd = i;
-				lsnew->next = *path;
-				*path = lsnew;
-				return (1);
-			}
-		}
-		i++;
-	}
-	if (matrix[i][roomsnum - 1])
-	{
-		lsnew = (t_lst *)malloc(sizeof(t_lst));
-		lsnew->fd = i;
-		lsnew->next = *path;
-		*path = lsnew;
-		print_path(*path);
-		path = NULL;
-		printf("|OK|\n");
-		return (1);
-	}
-	printf("||||\n");
+	if (start == n - 1)
+
 	return (0);
 }
 
 void		find_all_paths(t_data *data)
 {
-	t_lst	*path;
 	char 	*visited;
-	int 	i;
+	t_list	*path;
 
-	visited = ft_strnew(data->roomsnum - 1);
+	path = 0;
+	visited = ft_strnew((size_t)data->roomsnum - 1);
 
-	path = (t_lst *) malloc(sizeof(t_lst));
-	path = NULL;
-	can_traverse(data->matrix, &path, 0, data->roomsnum, visited);
+	can_traverse(data->matrix, 0, visited, data->roomsnum, &path);
 }
