@@ -14,6 +14,7 @@
 # define LEMIN_H
 # include "libft/libft.h"
 #include <stdio.h>
+#include <fcntl.h>
 # define UNKNOWN -1
 # define COMMENT 0
 # define COMMAND 1

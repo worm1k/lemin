@@ -73,9 +73,11 @@ static void	read_input(t_data *data)
 {
 	char	*temp;
 	int		step;
+	int 	fd;
 
+	fd = open("/nfs/2016/a/abykov/ClionProjects/lemin/maps/1", O_RDONLY);
 	temp = 0;
-	while (get_next_line(0, &temp) > 0)
+	while (get_next_line(fd, &temp) > 0)
 	{
 		step = try_add(temp, line_type(temp), data);
 		(temp) ? free(temp) : 0;
@@ -94,5 +96,5 @@ void		read_data()
 	data_init(&data);
 	read_input(data);
 	print_matrix(data);
-	find_all_paths(data);
+	//find_all_paths(data);
 }
