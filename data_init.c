@@ -18,7 +18,6 @@ void	data_init(t_data **data)
 	(*data)->antnum = -1;
 	(*data)->roomsnum = 0;
 	(*data)->rooms = NULL;
-	(*data)->joins = NULL;
 	(*data)->names = NULL;
 	(*data)->start = NULL;
 	(*data)->end = NULL;
@@ -37,4 +36,5 @@ void	matrix_init(t_data *data)
 		data->matrix[i] = ft_strnew(data->roomsnum - 1);
 		i++;
 	}
+	data->visited = ft_strnew((size_t)data->roomsnum - 1);
 }

@@ -28,23 +28,107 @@ static void print_path(t_list *path)
 	printf("\n");
 }
 
-static int	can_traverse(char **matrix, int start, char *visited, int n, t_list **path)
+static void	cre_path(t_data *data, t_rlist *path, int len)
 {
-	int		j;
-	t_list	*temp;
+	data->paths = (t_paths *)malloc(sizeof(t_paths));
+	data->paths->next = 0;
+	while (path)
+	{
+		
+		path = path->next;
+	}
+}
 
-	if (start == n - 1)
+static void	add_path(t_data *data, t_rlist *path, int len)
+{
+	t_rlist	*curr;
+	
+	if (!data->paths)
+	{
+		return (cre_path(data, path, len));
+	}
+	
+}
 
-	return (0);
+static void	print_rec(t_rlist *path)
+{
+	if (path->next)
+	{
+		print_rec(path->next);
+	}
+	printf("[%d] => ", path->index );
+}
+
+static void	pop_room(t_rlist **path)
+{
+	t_rlist	*temp;
+	
+	temp = (*path)->next;
+	free(*path);
+	*path = temp;
+}
+
+static void	push_room(int index, t_rlist **path)
+{
+	t_rlist	*temp;
+
+	temp = (t_rlist *)malloc(sizeof(t_rlist));
+	temp->index = index;
+	temp->next = *path;
+	*path = temp;
+}
+
+static int	can_traverse(t_data *data, int start, t_rlist **path, int len)
+{
+	int		i;
+
+	i = 0;
+	while (i < data->roomsnum)
+	{
+		if (data->matrix[start][i])
+		{
+			if (i == data->roomsnum - 1)
+			{
+				push_room(i, path);
+				add_path(data, *path, len);
+				print_rec(*path);printf("{%d}\n", len);
+				pop_room(path);
+			}
+			else if (!data->visited[i])
+			{
+				data->visited[i] = 1;
+				push_room(i, path);
+				can_traverse(data, i, path, len + 1);
+				pop_room(path);
+				data->visited[i] = 0;
+			}
+		}
+		i++;
+	}
+	/*
+    for (Object nextNode : nextNodes(node)) {
+       if (nextNode.equals(targetNode)) {
+           Stack temp = new Stack();
+           for (Object node1 : connectionPath)
+               temp.add(node1);
+           connectionPaths.add(temp);
+       } else if (!connectionPath.contains(nextNode)) {
+           connectionPath.push(nextNode);
+           findAllPaths(nextNode, targetNode);
+           connectionPath.pop();
+        }
+    }
+*/
 }
 
 void		find_all_paths(t_data *data)
 {
 	char 	*visited;
-	t_list	*path;
+	t_rlist	*path;
 
-	path = 0;
-	visited = ft_strnew((size_t)data->roomsnum - 1);
-
-	can_traverse(data->matrix, 0, visited, data->roomsnum, &path);
+	path = (t_rlist *)malloc(sizeof(t_rlist));
+	path->index = 0;
+	path->next = NULL;
+	data->visited[0] = 1;
+	can_traverse(data, 0, &path, 1);
 }

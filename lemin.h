@@ -31,32 +31,16 @@ typedef struct		s_rooms
 	struct s_rooms	*next;
 }					t_rooms;
 
-typedef	struct		s_joins
-{
-	char			*name1;
-	char			*name2;
-	struct s_joins	*next;
-}					t_joins;
-
-typedef struct		s_line
-{
-	int				type;
-	char			*name1;
-	char			*name2;
-	int				x;
-	int				y;
-}					t_line;
-
-typedef struct 		s_room
+typedef struct 		s_rlist
 {
 	int 			index;
-	struct s_room	*next;
-}					t_room;
+	struct s_rlist	*next;
+}					t_rlist;
 
 typedef struct 		s_paths
 {
 	int 			len;
-	t_room			*head;
+	t_rlist			*head;
 	struct s_paths	*next;
 }					t_paths;
 
@@ -65,12 +49,12 @@ typedef struct		s_data
 	int				antnum;
 	int				roomsnum;
 	t_rooms			*rooms;
-	t_joins			*joins;
 	char			**matrix;
 	char			**names;
 	t_rooms			*start;
 	t_rooms			*end;
 	t_paths			*paths;
+	char			*visited;
 }					t_data;
 
 void				read_data();
