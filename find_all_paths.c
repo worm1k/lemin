@@ -28,15 +28,27 @@ static void print_path(t_list *path)
 	printf("\n");
 }
 
+static void cpy_path(t_rlist **dst, t_rlist *src)
+{
+	t_rlist	*temp;
+	
+	while (src)
+	{
+		temp = (t_rlist *)malloc(sizeof(t_rlist));
+		temp->index = src->index;
+		temp->next = *dst;
+		*dst = temp;
+		src = src->next;
+	}
+}
+
 static void	cre_path(t_data *data, t_rlist *path, int len)
 {
 	data->paths = (t_paths *)malloc(sizeof(t_paths));
-	data->paths->next = 0;
-	while (path)
-	{
-		
-		path = path->next;
-	}
+	data->paths->len = len;
+	data->paths->next = NULL;
+	data->paths->head = NULL;
+	cpy_path(&data->paths->head, path);
 }
 
 static void	add_path(t_data *data, t_rlist *path, int len)
@@ -47,7 +59,6 @@ static void	add_path(t_data *data, t_rlist *path, int len)
 	{
 		return (cre_path(data, path, len));
 	}
-	
 }
 
 static void	print_rec(t_rlist *path)
