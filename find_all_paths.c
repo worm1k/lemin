@@ -42,23 +42,32 @@ static void cpy_path(t_rlist **dst, t_rlist *src)
 	}
 }
 
-static void	cre_path(t_data *data, t_rlist *path, int len)
+static void	cre_path(t_paths **paths, t_paths *next, t_rlist *path, int len)
 {
-	data->paths = (t_paths *)malloc(sizeof(t_paths));
-	data->paths->len = len;
-	data->paths->next = NULL;
-	data->paths->head = NULL;
-	cpy_path(&data->paths->head, path);
+	*paths = (t_paths *)malloc(sizeof(t_paths));
+	(*paths)->len = len;
+	(*paths)->next = next;
+	(*paths)->head = NULL;
+	cpy_path(&(*paths)->head, path);
 }
 
 static void	add_path(t_data *data, t_rlist *path, int len)
 {
-	t_rlist	*curr;
+	t_paths	*curr;
 	
+	data->pathsnum += 1;
 	if (!data->paths)
+		return (cre_path(&data->paths, NULL, path, len));
+	curr = data->paths;
+	if (len <= curr->len)
+		return (cre_path(&data->paths, data->paths, path, len));
+	while (curr->next)
 	{
-		return (cre_path(data, path, len));
+		if (curr->len <= len && len <= curr->next->len)
+			break ;
+		curr = curr->next;
 	}
+	return (cre_path(&curr->next, curr->next, path, len));
 }
 
 static void	print_rec(t_rlist *path)
@@ -142,4 +151,7 @@ void		find_all_paths(t_data *data)
 	path->next = NULL;
 	data->visited[0] = 1;
 	can_traverse(data, 0, &path, 1);
+	if (!data->paths)
+		exit_error(-1);
+	print_paths(data);
 }

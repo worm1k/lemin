@@ -12,10 +12,10 @@
 
 #include "lemin.h"
 
-void	print_matrix(t_data *data)
+void		print_matrix(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	printf("  ");
@@ -46,4 +46,28 @@ void	print_matrix(t_data *data)
 		printf("\n");
 		i++;
 	}
+}
+
+void		print_paths(t_data *data)
+{
+	t_paths	*curr;
+	t_rlist	*room;
+	
+	curr = data->paths;
+	printf("PRINTING PATHS [%d]:\n", data->pathsnum);
+	if (!curr)
+		printf("ERROR: No Paths\n");
+	while (curr)
+	{
+		printf("{%d}: ", curr->len);
+		room = curr->head;
+		while (room)
+		{
+			printf("[%d] => ", room->index);
+			room = room->next;
+		}
+		printf("\n");
+		curr = curr->next;
+	}
+	printf("PATHS ENDED\n");
 }
