@@ -50,10 +50,10 @@ typedef struct		s_data
 	int				roomsnum;
 	int				pathsnum;
 	t_rooms			*rooms;
-	char			**matrix;
-	char			**names;
 	t_rooms			*start;
 	t_rooms			*end;
+	char			**matrix;
+	char			**names;
 	t_paths			*paths;
 	char			*visited;
 }					t_data;
@@ -76,4 +76,5 @@ void				matrix_init(t_data *data);
 void				print_matrix(t_data *data);
 void				print_paths(t_data *data);
 void				find_all_paths(t_data *data);
+void				ft_destruct(t_data *data);
 #endif

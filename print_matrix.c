@@ -61,9 +61,11 @@ void		print_paths(t_data *data)
 	{
 		printf("{%d}: ", curr->len);
 		room = curr->head;
+		printf("[%d]", room->index);
+		room = room->next;
 		while (room)
 		{
-			printf("[%d] => ", room->index);
+			printf(" => [%d]", room->index);
 			room = room->next;
 		}
 		printf("\n");

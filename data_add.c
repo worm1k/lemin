@@ -79,4 +79,6 @@ void		add_join(t_data *data, char *str, char *command)
 	if (ft_strequ(join1, join2))
 		exit_error(g_n);
 	join_add(data, join1, join2);
+	(join1) ? (free(join1)) : (0);
+	(join2) ? (free(join2)) : (0);
 }

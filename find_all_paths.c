@@ -12,22 +12,6 @@
 
 #include "lemin.h"
 
-static void print_path(t_list *path)
-{
-	if (!path)
-	{
-		return;
-	}
-	printf("[%zu]", path->content_size);
-	path = path->next;
-	while (path)
-	{
-		printf(" => [%zu]", path->content_size);
-		path = path->next;
-	}
-	printf("\n");
-}
-
 static void cpy_path(t_rlist **dst, t_rlist *src)
 {
 	t_rlist	*temp;
@@ -70,15 +54,6 @@ static void	add_path(t_data *data, t_rlist *path, int len)
 	return (cre_path(&curr->next, curr->next, path, len));
 }
 
-static void	print_rec(t_rlist *path)
-{
-	if (path->next)
-	{
-		print_rec(path->next);
-	}
-	printf("[%d] => ", path->index );
-}
-
 static void	pop_room(t_rlist **path)
 {
 	t_rlist	*temp;
@@ -111,7 +86,6 @@ static int	can_traverse(t_data *data, int start, t_rlist **path, int len)
 			{
 				push_room(i, path);
 				add_path(data, *path, len);
-				print_rec(*path);printf("{%d}\n", len);
 				pop_room(path);
 			}
 			else if (!data->visited[i])
@@ -125,20 +99,6 @@ static int	can_traverse(t_data *data, int start, t_rlist **path, int len)
 		}
 		i++;
 	}
-	/*
-    for (Object nextNode : nextNodes(node)) {
-       if (nextNode.equals(targetNode)) {
-           Stack temp = new Stack();
-           for (Object node1 : connectionPath)
-               temp.add(node1);
-           connectionPaths.add(temp);
-       } else if (!connectionPath.contains(nextNode)) {
-           connectionPath.push(nextNode);
-           findAllPaths(nextNode, targetNode);
-           connectionPath.pop();
-        }
-    }
-*/
 }
 
 void		find_all_paths(t_data *data)
@@ -154,4 +114,5 @@ void		find_all_paths(t_data *data)
 	if (!data->paths)
 		exit_error(-1);
 	print_paths(data);
+	(path) ? (free(path)) : (0);
 }

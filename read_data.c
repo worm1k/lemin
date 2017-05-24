@@ -97,4 +97,5 @@ void		read_data()
 	read_input(data);
 	print_matrix(data);
 	find_all_paths(data);
+	ft_destruct(data);
 }
