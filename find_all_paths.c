@@ -45,6 +45,7 @@ static void	add_path(t_data *data, t_rlist *path, int len)
 	curr = data->paths;
 	if (len <= curr->len)
 		return (cre_path(&data->paths, data->paths, path, len));
+	// useless code 
 	while (curr->next)
 	{
 		if (curr->len <= len && len <= curr->next->len)
@@ -114,5 +115,5 @@ void		find_all_paths(t_data *data)
 	if (!data->paths)
 		exit_error(-1);
 	print_paths(data);
-	(path) ? (free(path)) : (0);
+	free(path);
 }

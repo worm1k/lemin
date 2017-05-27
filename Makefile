@@ -34,7 +34,8 @@ SRC_NAME =	main.c \
 			join_add.c \
 			print_matrix.c \
 			find_all_paths.c \
-			ft_destruct.c
+			ft_destruct.c \
+			find_path_group.c
 
 INC_NAME = lemin.h
 
