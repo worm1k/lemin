@@ -40,6 +40,7 @@ typedef struct 		s_rlist
 typedef struct 		s_paths
 {
 	int 			len;
+	char			visited;
 	t_rlist			*head;
 	struct s_paths	*next;
 }					t_paths;

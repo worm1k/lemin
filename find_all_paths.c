@@ -29,6 +29,7 @@ static void cpy_path(t_rlist **dst, t_rlist *src)
 static void	cre_path(t_paths **paths, t_paths *next, t_rlist *path, int len)
 {
 	*paths = (t_paths *)malloc(sizeof(t_paths));
+	(*paths)->visited = 0;
 	(*paths)->len = len;
 	(*paths)->next = next;
 	(*paths)->head = NULL;
