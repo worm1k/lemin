@@ -56,6 +56,7 @@ typedef struct		s_data
 	char			**matrix;
 	char			**names;
 	t_paths			*paths;
+	t_paths			*group;
 	char			*visited;
 }					t_data;
 

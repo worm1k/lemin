@@ -24,6 +24,7 @@ void	data_init(t_data **data)
 	(*data)->end = NULL;
 	(*data)->matrix = NULL;
 	(*data)->paths = NULL;
+	(*data)->group = NULL;
 }
 
 void	matrix_init(t_data *data)

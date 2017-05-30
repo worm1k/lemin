@@ -12,6 +12,18 @@
 
 #include "lemin.h"
 
+static void	ft_delgroup(t_paths *group)
+{
+	t_paths		*todel;
+
+	while (group)
+	{
+		todel = group;
+		group = group->next;
+		free(todel);
+	}
+}
+
 static void ft_delpaths(t_paths *paths)
 {
     t_paths	*curr;
@@ -72,6 +84,7 @@ void        ft_destruct(t_data *data)
     ft_delrooms(data->start);
     ft_del2dchar(data);
     ft_delpaths(data->paths);
+	ft_delgroup(data->group);
     free(data->visited);
     free(data);
 }
