@@ -18,7 +18,7 @@ void		print_matrix(t_data *data)
 	int		j;
 
 	i = 0;
-	printf("  ");
+	printf("   ");
 	while (i < data->roomsnum)
 	{
 		printf(" %d", i % 10);
@@ -26,7 +26,7 @@ void		print_matrix(t_data *data)
 	}
 	printf("\n");
 	i = 0;
-	printf("--");
+	printf("---");
 	while (i < data->roomsnum)
 	{
 		printf("+-");
@@ -37,7 +37,7 @@ void		print_matrix(t_data *data)
 	while (i < data->roomsnum)
 	{
 		j = 0;
-		printf("%d ", i);
+		printf("%2d ", i);
 		while (j < data->roomsnum)
 		{
 			printf(" %d", data->matrix[i][j]);
@@ -59,13 +59,13 @@ void		print_paths(t_data *data)
 		printf("ERROR: No Paths\n");
 	while (curr)
 	{
-		printf("{%d}: ", curr->len);
+		printf("{%2d}: ", curr->len);
 		room = curr->head;
-		printf("[%d]", room->index);
+		printf("[%2d]", room->index);
 		room = room->next;
 		while (room)
 		{
-			printf(" => [%d]", room->index);
+			printf(" => [%2d]", room->index);
 			room = room->next;
 		}
 		printf("\n");
