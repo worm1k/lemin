@@ -75,8 +75,10 @@ static void	read_input(t_data *data)
 	int		step;
 	int 	fd;
 
-	fd = open("./maps/2", O_RDONLY);
+	//fd = open("./maps/2", O_RDONLY);
+	fd = open("/nfs/2016/a/abykov/ClionProjects/lemin/maps/2", O_RDONLY);
 	temp = 0;
+	step = -1;
 	while (get_next_line(fd, &temp) > 0)
 	{
 		step = try_add(temp, line_type(temp), data);

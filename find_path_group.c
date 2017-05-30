@@ -52,8 +52,7 @@ static float    average_moves_num(t_paths *path, int antnum)
     float       res;
     int         roomsn;
     int         pathsn;
-    
-    res = 0;
+
     roomsn = 0;
     pathsn = 0;
     while (path)
@@ -68,13 +67,19 @@ static float    average_moves_num(t_paths *path, int antnum)
 
 static void     compare_group(t_paths **res, t_paths **temp, int antnum)
 {
-    if (average_moves_num(*res, antnum) < average_moves_num(*temp, antnum))
-        printf("OK\n");
+	float 		a;
+	float 		b;
+
+	a = average_moves_num(*res, antnum);
+	b = average_moves_num(*temp, antnum);
+
+    if (a < b)
+        printf("OK[%f] < [%f]\n", a, b);
     else
-        printf("NO\n");
+        printf("NO[%f] >= [%f]\n", a, b);
 }
 
-static int      has_dup_in_path(t_rlist *a, t_rlist *b, int antnum)
+static int      has_dup_in_path(t_rlist *a, t_rlist *b)
 {
     t_rlist     *curr;
     
@@ -85,10 +90,8 @@ static int      has_dup_in_path(t_rlist *a, t_rlist *b, int antnum)
         {
             if (a->index == curr->index)
             {
-            //	printf("[%d]==[%d]BREAK\n", a->index, curr->index);
                 return (1);
             }
-           // printf("[%d]!=[%d]\n", a->index, curr->index);
             curr = curr->next;
         }
         a = a->next;
@@ -96,22 +99,19 @@ static int      has_dup_in_path(t_rlist *a, t_rlist *b, int antnum)
     return (0);
 }
 
-static int      has_dup_in_group(t_paths *group, t_paths *path, int antnum)
+static int      has_dup_in_group(t_paths *group, t_paths *path)
 {
-    t_paths     *curr;
-    
     while (group)
     {
-        if (has_dup_in_path(group->head->next, path->head->next, antnum))
+        if (has_dup_in_path(group->head->next, path->head->next))
             return (1);
         group = group->next;
     }
     return (0);
 }
 
-static int		find_next_group(t_paths **dst, t_paths *src, int i, t_data *data)
+static int		find_next_group(t_paths **dst, t_paths *src, int i)
 {
-    t_paths     *add;
     int         j;
 	t_paths		*curr;
     
@@ -134,7 +134,7 @@ static int		find_next_group(t_paths **dst, t_paths *src, int i, t_data *data)
     j = 0;
 	while (src)
     {
-        if (src != curr && !has_dup_in_group(*dst, src, data->antnum))
+        if (src != curr && !has_dup_in_group(*dst, src))
         {
             printf ("Added path ##[%d]\n", j);
             add_path(dst, src);
@@ -143,7 +143,6 @@ static int		find_next_group(t_paths **dst, t_paths *src, int i, t_data *data)
         src = src->next;
     }
     print_group(*dst);
-    printf ("===============\n\n");
 	return (1);
 }
 
@@ -156,12 +155,13 @@ void            find_path_group(t_data *data)
     i = 0;
     res = NULL;
     temp = NULL;
-    find_next_group(&res, data->paths, i++, data);
+    find_next_group(&res, data->paths, i++);
     printf("INIT CREATED\n");
-    while (find_next_group(&temp, data->paths, i++, data))
+    while (find_next_group(&temp, data->paths, i++))
     {
         
-       // compare_group(&res, &temp);
+		compare_group(&res, &temp, data->antnum);
+		printf ("===============\n\n");
         temp = NULL;
     }
     
