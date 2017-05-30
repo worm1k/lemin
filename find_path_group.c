@@ -65,6 +65,19 @@ static float    average_moves_num(t_paths *path, int antnum)
 	return (res);
 }
 
+static void		del_path(t_paths **path, t_paths *value)
+{
+	t_paths		*todel;
+
+	while (*path)
+	{
+		todel = *path;
+		*path = (*path)->next;
+		free(todel);
+	}
+	*path = value;
+}
+
 static void     compare_group(t_paths **res, t_paths **temp, int antnum)
 {
 	float 		a;
@@ -73,10 +86,16 @@ static void     compare_group(t_paths **res, t_paths **temp, int antnum)
 	a = average_moves_num(*res, antnum);
 	b = average_moves_num(*temp, antnum);
 
-	if (a < b)
-		printf("OK[%f] < [%f]\n", a, b);
+	if (a <= b)
+	{
+		printf("OK[%f] <= [%f]\n", a, b);
+		del_path(temp, NULL);
+	}
 	else
-		printf("NO[%f] >= [%f]\n", a, b);
+	{
+		printf("NO[%f] > [%f]\n", a, b);
+		del_path(res, *temp);
+	}
 }
 
 static int      has_dup_in_path(t_rlist *a, t_rlist *b)
@@ -122,7 +141,7 @@ static int		find_next_group(t_paths **dst, t_paths *src, int i)
 	{
 		if (curr->visited == 0)
 		{
-			printf ("Added path #[%d]\n", j);
+			//printf("Added path #[%d]\n", j);
 			add_path(dst, curr);
 			break ;
 		}
@@ -136,7 +155,7 @@ static int		find_next_group(t_paths **dst, t_paths *src, int i)
 	{
 		if (src != curr && !has_dup_in_group(*dst, src))
 		{
-			printf ("Added path ##[%d]\n", j);
+			//printf("Added path ##[%d]\n", j);
 			add_path(dst, src);
 		}
 		j++;
@@ -159,9 +178,10 @@ void            find_path_group(t_data *data)
 	printf("INIT CREATED\n");
 	while (find_next_group(&temp, data->paths, i++))
 	{
-
 		compare_group(&res, &temp, data->antnum);
 		printf ("===============\n\n");
 		temp = NULL;
 	}
+	printf("OPTIMAL PATH GROUP:\n");
+	print_group(res);
 }
