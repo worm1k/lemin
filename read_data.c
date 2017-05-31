@@ -101,4 +101,5 @@ void		read_data()
 	find_all_paths(data);
 	find_path_group(data);
 	ft_destruct(data);
+	lem_in(data);
 }

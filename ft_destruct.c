@@ -22,6 +22,7 @@ static void	ft_delgroup(t_paths *group)
 		group = group->next;
 		free(todel);
 	}
+	free(group);
 }
 
 static void ft_delpaths(t_paths *paths)
@@ -75,6 +76,7 @@ static void ft_delrooms(t_rooms *room)
         free(curr);
         curr = temp;
     }
+	free(room);
 }
 
 void        ft_destruct(t_data *data)

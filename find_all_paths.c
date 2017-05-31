@@ -20,6 +20,7 @@ static void cpy_path(t_rlist **dst, t_rlist *src)
 	{
 		temp = (t_rlist *)malloc(sizeof(t_rlist));
 		temp->index = src->index;
+		temp->ant = 0;
 		temp->next = *dst;
 		*dst = temp;
 		src = src->next;
@@ -71,6 +72,7 @@ static void	push_room(int index, t_rlist **path)
 
 	temp = (t_rlist *)malloc(sizeof(t_rlist));
 	temp->index = index;
+	temp->ant = 0;
 	temp->next = *path;
 	*path = temp;
 }
@@ -105,11 +107,11 @@ static int	can_traverse(t_data *data, int start, t_rlist **path, int len)
 
 void		find_all_paths(t_data *data)
 {
-	char 	*visited;
 	t_rlist	*path;
 
 	path = (t_rlist *)malloc(sizeof(t_rlist));
 	path->index = 0;
+	path->ant = 0;
 	path->next = NULL;
 	data->visited[0] = 1;
 	can_traverse(data, 0, &path, 1);

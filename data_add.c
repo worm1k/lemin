@@ -15,7 +15,7 @@
 char		*add_command(t_data *data, char *str, char *command)
 {
 	printf("COMMAND [%s]\n", str);
-	int		len;
+	size_t	len;
 
 	if (command != 0)
 		exit_error(g_n);
