@@ -177,7 +177,8 @@ static int		find_next_group(t_paths **dst, t_paths *src, int i, t_data *data)
 		j++;
 		src = src->next;
 	}
-	//print_group(*dst, data);
+	print_group(*dst, data);
+	//printf ("===============\n\n");
 	return (1);
 }
 
@@ -186,7 +187,6 @@ void            find_path_group(t_data *data)
 	t_paths     *temp;
 	int         i;
 
-	printf ("===============\n\n");
 	i = 0;
 	temp = NULL;
 	find_next_group(&data->group, data->paths, i++, data);
@@ -200,4 +200,5 @@ void            find_path_group(t_data *data)
 	printf("OPTIMAL PATH GROUP:\n");
 	print_group(data->group, data);
 	printf("IN[%.2f] TURNS\n", average_moves_num(data->group, data->antnum));
+	printf ("===============\n\n");
 }

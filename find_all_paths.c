@@ -47,7 +47,7 @@ static void	add_path(t_data *data, t_rlist *path, int len)
 	curr = data->paths;
 	if (len <= curr->len)
 		return (cre_path(&data->paths, data->paths, path, len));
-	// useless code 
+	// NOT useless code, it happens
 	while (curr->next)
 	{
 		if (curr->len <= len && len <= curr->next->len)
@@ -77,7 +77,7 @@ static void	push_room(int index, t_rlist **path)
 	*path = temp;
 }
 
-static int	can_traverse(t_data *data, int start, t_rlist **path, int len)
+static void	can_traverse(t_data *data, int start, t_rlist **path, int len)
 {
 	int		i;
 

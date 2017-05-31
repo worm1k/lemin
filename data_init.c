@@ -18,6 +18,7 @@ void	data_init(t_data **data)
 	(*data)->antnum = -1;
 	(*data)->roomsnum = 0;
 	(*data)->pathsnum = 0;
+	(*data)->space = 0;
 	(*data)->rooms = NULL;
 	(*data)->names = NULL;
 	(*data)->start = NULL;

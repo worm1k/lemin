@@ -52,6 +52,7 @@ typedef struct		s_data
 	int				antnum;
 	int				roomsnum;
 	int				pathsnum;
+	int 			space;
 	t_rooms			*rooms;
 	t_rooms			*start;
 	t_rooms			*end;
@@ -81,6 +82,6 @@ void				print_matrix(t_data *data);
 void				print_paths(t_data *data);
 void				find_all_paths(t_data *data);
 void		        find_path_group(t_data *data);
-//void				lem_in(t_data *data);
+void				lem_in(t_data *data);
 void				ft_destruct(t_data *data);
 #endif
