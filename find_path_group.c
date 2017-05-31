@@ -39,14 +39,28 @@ static void		print_group(t_paths *group, t_data *data)
 static void		add_path(t_paths **dst, t_paths *src)
 {
 	t_paths		*add;
+	t_paths		*curr;
 
 	src->visited = 1;
 	add = (t_paths *)malloc(sizeof(t_paths));
 	add->len = src->len;
 	add->head = src->head;
-	add->next = *dst;
 	add->visited = 42;
-	*dst = add;
+	curr = *dst;
+	if (curr == NULL || add->len <= curr->len)
+	{
+		add->next = *dst;
+		*dst = add;
+		return ;
+	}
+	while (curr->next)
+	{
+		if (curr->len <= add->len && add->len <= curr->next->len)
+			break ;
+		curr = curr->next;
+	}
+	add->next = curr->next;
+	curr->next = add;
 }
 
 static float    average_moves_num(t_paths *path, int antnum)
@@ -172,6 +186,7 @@ void            find_path_group(t_data *data)
 	t_paths     *temp;
 	int         i;
 
+	printf ("===============\n\n");
 	i = 0;
 	temp = NULL;
 	find_next_group(&data->group, data->paths, i++, data);

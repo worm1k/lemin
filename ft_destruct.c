@@ -86,7 +86,7 @@ void        ft_destruct(t_data *data)
     ft_delrooms(data->start);
     ft_del2dchar(data);
     ft_delpaths(data->paths);
-	ft_delgroup(data->group);
+	//ft_delgroup(data->group);
     free(data->visited);
     free(data);
 }

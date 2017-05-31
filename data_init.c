@@ -35,7 +35,7 @@ void	matrix_init(t_data *data)
 	i = 0;
 	while (i < data->roomsnum)
 	{
-		data->matrix[i] = ft_strnew(data->roomsnum - 1);
+		data->matrix[i] = ft_strnew((size_t)data->roomsnum - 1);
 		i++;
 	}
 	data->visited = ft_strnew((size_t)data->roomsnum - 1);

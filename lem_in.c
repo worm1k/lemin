@@ -11,11 +11,14 @@
 /* ************************************************************************** */
 
 #include "lemin.h"
-
+/*
 void		ant_step(t_rlist *room, t_data *data)
 {
-	if ()
+	if (room->next->next == NULL)
+	{
+		printf(" L%d-%s", room->ant, data->names[room->index]);
 		return ;
+	}
 	if (room)
 }
 
@@ -23,10 +26,9 @@ void		lem_in(t_data *data)
 {
 	int 	ant;
 	t_paths	*path;
-	int 	i;
 
 
-	ants = 1;
+	ant = 1;
 	while (ant <= data->antnum)
 	{
 		path = data->group;
@@ -38,3 +40,4 @@ void		lem_in(t_data *data)
 		ant++;
 	}
 }
+*/

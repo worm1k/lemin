@@ -100,6 +100,6 @@ void		read_data()
 	//print_matrix(data);
 	find_all_paths(data);
 	find_path_group(data);
-	ft_destruct(data);
-	lem_in(data);
+	//ft_destruct(data);
+	//lem_in(data);
 }
