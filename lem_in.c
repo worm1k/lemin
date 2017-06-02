@@ -21,18 +21,21 @@
 static void	first_step(t_data *data, int *ant, int *in_way)
 {
 	t_paths	*path;
+	int		temp;
 
 	path = data->group;
-	while (path && *ant <= data->antnum)
+	temp = 0;
+	while (path && *ant + temp <= data->antnum)
 	{
 		if (data->antnum - *ant + 1 > path->profit)
 		{
 			*in_way = 1;
-			path->head->ant = *ant;
-			*ant += 1;
+			path->head->ant = *ant + temp;
+			temp += 1;
 		}
 		path = path->next;
 	}
+	*ant += temp;
 }
 
 static void	ant_step(t_rlist *room, t_data *data, int *in_way)
@@ -64,7 +67,7 @@ static void	calc_profit(t_paths *group)
 	len0 = group->len;
 	while (group)
 	{
-		group->profit = group->len - len0 + i - 1;
+		group->profit = group->len - len0 + i;
 		group = group->next;
 		i++;
 	}
