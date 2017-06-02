@@ -14,7 +14,6 @@
 
 char		*add_command(char *str, char *command)
 {
-	//printf("COMMAND [%s]\n", str);
 	size_t	len;
 
 	if (command != 0)
@@ -32,7 +31,6 @@ void		add_room(t_data *data, char *str, char *command)
 	room->x = ft_atoi_exit(ft_strchr(str, ' ') + 1);
 	room->y = ft_atoi_exit(ft_strrchr(str, ' ') + 1);
 	room->next = NULL;
-	//printf("ROOM [%s][%d][%d]\t[%s]\n", room->name, room->x, room->y, str);
 	if (ft_strequ(command, "start"))
 		room_add_start(data, room);
 	else if (ft_strequ(command, "end"))
@@ -49,7 +47,6 @@ void		add_names(t_data *data)
 	t_rooms	*curr;
 	int		i;
 
-	//printf("GENERATING NAMES ARRAY\n");
 	if (data->start == NULL || data->end == NULL)
 		exit_error(data);
 	curr = data->rooms;
@@ -77,7 +74,6 @@ void		add_join(t_data *data, char *str, char *command)
 	join1 = ft_strsub(str, 0, ft_strchr(str, '-') - str);
 	str2 = ft_strchr(str, '-') + 1;
 	join2 = ft_strsub(str2, 0, ft_strlen(str2));
-	//printf("JOIN [%s]-[%s] [%s]\n", join1, join2, str);
 	if (ft_strequ(join1, join2))
 		exit_error(data);
 	join_add(data, join1, join2);

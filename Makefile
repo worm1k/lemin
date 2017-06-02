@@ -32,7 +32,6 @@ SRC_NAME =	main.c \
 			ft_atoi_exit.c \
 			room_add.c \
 			join_add.c \
-			print_matrix.c \
 			find_all_paths.c \
 			ft_destruct.c \
 			find_path_group.c \

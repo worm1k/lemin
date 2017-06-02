@@ -12,13 +12,6 @@
 
 #include "lemin.h"
 
-// # define UNKNOWN -1
-// # define COMMENT 0
-// # define COMMAND 1
-// # define ROOM 2
-// # define JOIN 3
-// # define ANTNUM 4
-
 static int		try_add(char *str, int type, t_data *data)
 {
 	static int	curr = 0;
@@ -28,7 +21,6 @@ static int		try_add(char *str, int type, t_data *data)
 	{
 		if (curr != 0)
 			exit_error(data);
-		//printf("ANTNUM [%s]\n", str);
 		if (ft_strequ(command, "start") || ft_strequ(command, "end"))
 			exit_error(data);
 		data->antnum = ft_atoi_exit(str);
@@ -60,7 +52,6 @@ static int		try_add(char *str, int type, t_data *data)
 	}
 	else if (type == COMMENT)
 	{
-		//printf("Comment [%s]\n", str);
 		if (command != 0)
 			exit_error(data);
 	}
@@ -86,8 +77,6 @@ static void	read_input(t_data *data, int fd)
 	char	*temp;
 	int		step;
 
-	//fd = open("./maps/2", O_RDONLY);
-	//fd = open("/nfs/2016/a/abykov/ClionProjects/lemin/maps/5", O_RDONLY);
 	temp = 0;
 	step = -1;
 	while (get_next_line(fd, &temp) > 0)

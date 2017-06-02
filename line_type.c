@@ -12,13 +12,6 @@
 
 #include "lemin.h"
 
-// # define UNKNOWN -1
-// # define COMMENT 0
-// # define COMMAND 1
-// # define ROOM 2
-// # define JOIN 3
-// # define ANTNUM 4
-
 static int	isantnum(char *str)
 {
 	int		i;
@@ -88,34 +81,26 @@ static int	isroom(char *str)
 
 int			line_type(char *line)
 {
-	// printf("type of [%15s]", line);
 	if (line[0] == '#' && line[1] == '#')
 	{
-		// printf(" is COMMAND\n");
 		return (COMMAND);
 	}
 	else if (line[0] == '#')
 	{
-		// printf(" is COMMENT\n");
 		return (COMMENT);
 	}
 	else if (isroom(line))
 	{
-		// printf(" is ROOM\n");
 		return (ROOM);
 	}
 	else if (isjoin(line))
 	{
-		// printf(" is JOIN\n");
 		return (JOIN);
 	}
 	else if (isantnum(line))
 	{
-		// printf(" is ANTNUM\n");
 		return (ANTNUM);
 	}
-
-	// printf(" is UNKOWN\n");
 	exit_error(NULL);
 	return (42);
 }

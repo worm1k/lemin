@@ -13,14 +13,16 @@
 #ifndef LEMIN_H
 # define LEMIN_H
 # include "libft/libft.h"
-//#include <stdio.h>
 # include <fcntl.h>
-# define UNKNOWN -1
-# define COMMENT 0
-# define COMMAND 1
-# define ROOM 2
-# define JOIN 3
-# define ANTNUM 4
+
+enum 				e_line
+{
+	COMMENT = 0,
+	COMMAND,
+	ROOM,
+	JOIN,
+	ANTNUM
+};
 
 typedef struct		s_rooms
 {
@@ -77,8 +79,6 @@ void				room_add_mid(t_data *data, t_rooms *room);
 void				room_add_end(t_data *data, t_rooms *room);
 void				join_add(t_data *data, char *join1, char *join2);
 void				matrix_init(t_data *data);
-void				print_matrix(t_data *data);
-void				print_paths(t_data *data);
 void				find_all_paths(t_data *data);
 void		        find_path_group(t_data *data);
 void				lem_in(t_data *data);

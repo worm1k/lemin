@@ -116,6 +116,5 @@ void		find_all_paths(t_data *data)
 	can_traverse(data, 0, &path, 1);
 	if (!data->paths)
 		exit_error(NULL);
-	//print_paths(data);
 	free(path);
 }

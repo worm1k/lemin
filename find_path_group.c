@@ -12,30 +12,6 @@
 
 #include "lemin.h"
 
-static void		print_group(t_paths *group, t_data *data)
-{/*
-	t_paths		*curr;
-	t_rlist		*room;
-
-	curr = group;
-	while (curr)
-	{
-		printf("{%d}: ", curr->len);
-		room = curr->head;
-		printf("[%s]", data->names[room->index]);
-		//printf("[%d]", room->index);
-		room = room->next;
-		while (room)
-		{
-			printf(" => [%s]", data->names[room->index]);
-			//printf(" => [%d]", room->index);
-			room = room->next;
-		}
-		printf("\n");
-		curr = curr->next;
-	}*/
-}
-
 static void		add_path(t_paths **dst, t_paths *src)
 {
 	t_paths		*add;
@@ -104,12 +80,10 @@ static void     compare_group(t_paths **res, t_paths **temp, int antnum)
 
 	if (a <= b)
 	{
-		//printf("OK[%f] <= [%f]\n", a, b);
 		del_path(temp, NULL);
 	}
 	else
 	{
-		//printf("NO[%f] > [%f]\n", a, b);
 		del_path(res, *temp);
 	}
 }
@@ -145,19 +119,17 @@ static int      has_dup_in_group(t_paths *group, t_paths *path)
 	return (0);
 }
 
-static int		find_next_group(t_paths **dst, t_paths *src, int i, t_data *data)
+static int		find_next_group(t_paths **dst, t_paths *src)
 {
 	int         j;
 	t_paths		*curr;
 
-	//printf ("group #[%d]:\n", i);
 	curr = src;
 	j = 0;
 	while (curr)
 	{
 		if (curr->visited == 0)
 		{
-			//printf("Added path #[%d]\n", j);
 			add_path(dst, curr);
 			break ;
 		}
@@ -171,34 +143,23 @@ static int		find_next_group(t_paths **dst, t_paths *src, int i, t_data *data)
 	{
 		if (src != curr && !has_dup_in_group(*dst, src))
 		{
-			//printf("Added path ##[%d]\n", j);
 			add_path(dst, src);
 		}
 		j++;
 		src = src->next;
 	}
-	//print_group(*dst, data);
-	//printf ("===============\n\n");
 	return (1);
 }
 
 void            find_path_group(t_data *data)
 {
 	t_paths     *temp;
-	int         i;
 
-	i = 0;
 	temp = NULL;
-	find_next_group(&data->group, data->paths, i++, data);
-	while (find_next_group(&temp, data->paths, i++, data))
+	find_next_group(&data->group, data->paths);
+	while (find_next_group(&temp, data->paths))
 	{
 		compare_group(&data->group, &temp, data->antnum);
-		//printf ("===============\n\n");
 		temp = NULL;
 	}
-	//printf ("===============\n\n");
-	//printf("OPTIMAL PATH GROUP:\n");
-	//print_group(data->group, data);
-	//printf("IN[%.2f] TURNS\n", average_moves_num(data->group, data->antnum));
-	//printf ("===============\n\n");
 }

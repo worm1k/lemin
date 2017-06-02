@@ -21,7 +21,6 @@ static int	index_of(t_data *data, char *str)
 	{
 		if (ft_strequ(str, data->names[res]))
 		{
-			//printf("INDEX_OF[%s]:[%d]\n", str, res);
 			return (res);
 		}
 		res++;

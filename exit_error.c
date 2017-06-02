@@ -14,7 +14,6 @@
 
 void	exit_error(t_data *data)
 {
-	//printf("ERROR on [%d]\n", n);
 	ft_putendl("ERROR");
 	ft_destruct(data);
 	exit(0);
