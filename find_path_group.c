@@ -13,7 +13,7 @@
 #include "lemin.h"
 
 static void		print_group(t_paths *group, t_data *data)
-{
+{/*
 	t_paths		*curr;
 	t_rlist		*room;
 
@@ -33,7 +33,7 @@ static void		print_group(t_paths *group, t_data *data)
 		}
 		printf("\n");
 		curr = curr->next;
-	}
+	}*/
 }
 
 static void		add_path(t_paths **dst, t_paths *src)
@@ -177,7 +177,7 @@ static int		find_next_group(t_paths **dst, t_paths *src, int i, t_data *data)
 		j++;
 		src = src->next;
 	}
-	print_group(*dst, data);
+	//print_group(*dst, data);
 	//printf ("===============\n\n");
 	return (1);
 }
@@ -196,9 +196,9 @@ void            find_path_group(t_data *data)
 		//printf ("===============\n\n");
 		temp = NULL;
 	}
-	printf ("===============\n\n");
-	printf("OPTIMAL PATH GROUP:\n");
-	print_group(data->group, data);
-	printf("IN[%.2f] TURNS\n", average_moves_num(data->group, data->antnum));
-	printf ("===============\n\n");
+	//printf ("===============\n\n");
+	//printf("OPTIMAL PATH GROUP:\n");
+	//print_group(data->group, data);
+	//printf("IN[%.2f] TURNS\n", average_moves_num(data->group, data->antnum));
+	//printf ("===============\n\n");
 }

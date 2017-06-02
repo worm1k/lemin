@@ -12,9 +12,30 @@
 
 #include "lemin.h"
 
-int		main()
+void	print_usage(void)
 {
-	g_n = 1;
-	read_data();
+	ft_putendl("usage: ./lem_in [-f file]");
+}
+
+int		main(int argc, char **argv)
+{
+	int	fd;
+
+	if (argc == 1)
+		read_data(0);
+	else if (argc == 3)
+	{
+		if (ft_strequ(argv[1], "-f"))
+		{
+			if ((fd = open(argv[2], O_RDONLY)) > 0)
+				read_data(fd);
+			else
+				exit_error(NULL);
+		}
+		else
+			print_usage();
+	}
+	else
+		print_usage();
 	return (0);
 }

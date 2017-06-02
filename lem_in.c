@@ -18,11 +18,23 @@
 
 #include "lemin.h"
 
+static void ft_printf(int d, char *s)
+{
+	write(1, "L", 1);
+	ft_putnbr(d);
+	write(1, "-", 1);
+	ft_putstr(s);
+}
+
 static void	first_step(t_data *data, int *ant, int *in_way)
 {
 	t_paths	*path;
 	int		temp;
 
+	if (*in_way == 1)
+	{
+		(write(1, "\n", 1));
+	}
 	path = data->group;
 	temp = 0;
 	while (path && *ant + temp <= data->antnum)
@@ -46,10 +58,10 @@ static void	ant_step(t_rlist *room, t_data *data, int *in_way)
 		if ((room->next->next == NULL || room->next->ant == 0) && room->ant != 0)
 		{
 			if (data->space == 1)
-				printf(" ");
+				write(1, " ", 1);
 			else
 				data->space = 1;
-			printf("L%d-%s", room->ant, data->names[room->next->index]);
+			ft_printf(room->ant, data->names[room->next->index]);
 			room->next->ant = room->ant;
 			room->ant = 0;
 			*in_way = 1;
@@ -82,7 +94,7 @@ void		lem_in(t_data *data)
 	calc_profit(data->group);
 	ant = 1;
 	in_way = 1;
-	while (in_way)
+	while (in_way != 0)
 	{
 		in_way = 0;
 		path = data->group;
@@ -91,7 +103,6 @@ void		lem_in(t_data *data)
 			ant_step(path->head, data, &in_way);
 			path = path->next;
 		}
-		(ant != 1) ? (printf("\n")) : (0);
 		data->space = 0;
 		first_step(data, &ant, &in_way);
 	}

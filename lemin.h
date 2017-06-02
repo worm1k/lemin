@@ -13,15 +13,14 @@
 #ifndef LEMIN_H
 # define LEMIN_H
 # include "libft/libft.h"
-#include <stdio.h>
-#include <fcntl.h>
+//#include <stdio.h>
+# include <fcntl.h>
 # define UNKNOWN -1
 # define COMMENT 0
 # define COMMAND 1
 # define ROOM 2
 # define JOIN 3
 # define ANTNUM 4
-int					g_n;
 
 typedef struct		s_rooms
 {
@@ -51,7 +50,6 @@ typedef struct		s_data
 {
 	int				antnum;
 	int				roomsnum;
-	int				pathsnum;
 	int 			space;
 	t_rooms			*rooms;
 	t_rooms			*start;
@@ -61,15 +59,16 @@ typedef struct		s_data
 	t_paths			*paths;
 	t_paths			*group;
 	char			*visited;
+	char 			*input;
 }					t_data;
 
-void				read_data();
+void				read_data(int fd);
 void				data_init(t_data **data);
 int					isvalid(char **split);
 int					line_type(char *line);
 int					ft_atoi_exit(char *str);
-void				exit_error(int n);
-char				*add_command(t_data *data, char *str, char *command);
+void				exit_error(t_data *data);
+char				*add_command(char *str, char *command);
 void				add_room(t_data *data, char *str, char *command);
 void				add_names(t_data *data);
 void				add_join(t_data *data, char *str, char *command);

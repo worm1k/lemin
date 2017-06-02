@@ -17,7 +17,6 @@ void	data_init(t_data **data)
 	(*data) = malloc(sizeof(t_data));
 	(*data)->antnum = -1;
 	(*data)->roomsnum = 0;
-	(*data)->pathsnum = 0;
 	(*data)->space = 0;
 	(*data)->rooms = NULL;
 	(*data)->names = NULL;
@@ -26,6 +25,8 @@ void	data_init(t_data **data)
 	(*data)->matrix = NULL;
 	(*data)->paths = NULL;
 	(*data)->group = NULL;
+	(*data)->visited = NULL;
+	(*data)->input = NULL;
 }
 
 void	matrix_init(t_data *data)

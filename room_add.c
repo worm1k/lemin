@@ -21,7 +21,7 @@ static void	room_check(t_data *data, t_rooms *room)
 	{
 		if (ft_strequ(curr->name, room->name)
 			|| (curr->x == room->x && curr->y == room->y))
-			exit_error(g_n);
+			exit_error(data);
 		curr = curr->next;
 	}
 	if (data->start)
@@ -29,21 +29,21 @@ static void	room_check(t_data *data, t_rooms *room)
 		curr = data->start;
 		if (ft_strequ(curr->name, room->name)
 			|| (curr->x == room->x && curr->y == room->y))
-			exit_error(g_n);
+			exit_error(data);
 	}
 	if (data->end)
 	{
 		curr = data->end;
 		if (ft_strequ(curr->name, room->name)
 			|| (curr->x == room->x && curr->y == room->y))
-			exit_error(g_n);
+			exit_error(data);
 	}
 }
 
 void		room_add_start(t_data *data, t_rooms *room)
 {
 	if (data->start != NULL)
-		exit_error(g_n);
+		exit_error(data);
 	room_check(data, room);
 	data->start = room;
 }
@@ -62,7 +62,7 @@ void		room_add_mid(t_data *data, t_rooms *room)
 void		room_add_end(t_data *data, t_rooms *room)
 {
 	if (data->end != NULL)
-		exit_error(g_n);
+		exit_error(data);
 	room_check(data, room);
 	data->end = room;
 }

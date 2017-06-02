@@ -26,8 +26,8 @@ static int	index_of(t_data *data, char *str)
 		}
 		res++;
 	}
-	exit_error(g_n);
-	return (-1);
+	exit_error(data);
+	return (42);
 }
 
 void		join_add(t_data *data, char *join1, char *join2)
@@ -38,7 +38,7 @@ void		join_add(t_data *data, char *join1, char *join2)
 	i = index_of(data, join1);
 	j = index_of(data, join2);
 	if (data->matrix[i][j] || data->matrix[j][i])
-		exit_error(g_n);
+		exit_error(data);
 	data->matrix[i][j] = 1;
 	data->matrix[j][i] = 1;
 }

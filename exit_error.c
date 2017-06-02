@@ -12,8 +12,10 @@
 
 #include "lemin.h"
 
-void	exit_error(int n)
+void	exit_error(t_data *data)
 {
-	printf("ERROR on [%d]\n", n);
+	//printf("ERROR on [%d]\n", n);
+	ft_putendl("ERROR");
+	ft_destruct(data);
 	exit(0);
 }

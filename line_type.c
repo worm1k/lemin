@@ -116,6 +116,6 @@ int			line_type(char *line)
 	}
 
 	// printf(" is UNKOWN\n");
-	exit(0);
-	return (UNKNOWN);
+	exit_error(NULL);
+	return (42);
 }

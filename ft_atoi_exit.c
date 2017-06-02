@@ -22,7 +22,7 @@ int		ft_atoi_exit(char *str)
 	while (ft_isdigit(str[i]))
 	{
 		if (res > 214748364 || (res == 214748364 && str[i] >= '8'))
-			exit_error(g_n);
+			exit_error(NULL);
 		res = res * 10 + str[i] - '0';
 		i++;
 	}

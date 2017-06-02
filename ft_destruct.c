@@ -22,7 +22,6 @@ static void	ft_delgroup(t_paths *group)
 		group = group->next;
 		free(todel);
 	}
-	free(group);
 }
 
 static void ft_delpaths(t_paths *paths)
@@ -53,40 +52,42 @@ static void ft_del2dchar(t_data *data)
     int     i;
     
     i = 0;
-    while (i < data->roomsnum)
-    {
-        free(data->matrix[i]);
-        free(data->names[i]);
-        i++;
-    }
-    free(data->matrix);
-    free(data->names);
+	if (data->matrix != NULL && data->names != NULL)
+	{
+		while (i < data->roomsnum)
+		{
+			free(data->matrix[i]);
+			free(data->names[i]);
+			i++;
+		}
+		free(data->matrix);
+		free(data->names);
+	}
 }
 
 static void ft_delrooms(t_rooms *room)
 {
-    t_rooms *curr;
-    t_rooms *temp;
+    t_rooms *todel;
 
-    curr = room;
-    while (curr)
+    while (room)
     {
-        temp = curr->next;
-        free(curr->name);
-        free(curr);
-        curr = temp;
+		todel = room;
+		room = room->next;
+		(todel->name) ? (free(todel->name)) : (0);
+		free(todel);
     }
-	free(room);
 }
 
 void        ft_destruct(t_data *data)
 {
+	if (data == NULL)
+		return ;
     ft_delrooms(data->rooms);
     ft_delrooms(data->end);
     ft_delrooms(data->start);
     ft_del2dchar(data);
     ft_delpaths(data->paths);
-	//ft_delgroup(data->group);
-    free(data->visited);
+	ft_delgroup(data->group);
+	(data->visited) ? (free(data->visited)) : (0);
     free(data);
 }
