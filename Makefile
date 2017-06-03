@@ -62,11 +62,11 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC)
 
 clean:
 	rm -rf $(OBJ)
-#	make -C $(LIB_PATH)/ clean
+	make -C $(LIB_PATH)/ clean
 
 fclean: clean
 	rm -rf $(NAME)
-#	rm -rf $(LIB_PATH)/$(LIB)
+	rm -rf $(LIB_PATH)/$(LIB)
 
 re: fclean all
 	
