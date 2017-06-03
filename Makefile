@@ -16,7 +16,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-NAME = a
+NAME = lem-in
 
 SRC_PATH = .
 INC_PATH = .
@@ -33,8 +33,10 @@ SRC_NAME =	main.c \
 			room_add.c \
 			join_add.c \
 			find_all_paths.c \
+			find_all_paths_2.c \
 			ft_destruct.c \
 			find_path_group.c \
+			find_path_group_2.c \
 			lem_in.c
 
 INC_NAME = lemin.h

@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static void ft_printf(int d, char *s)
+static void	ft_printf(int d, char *s)
 {
 	write(1, "L", 1);
 	ft_putnbr(d);
@@ -49,7 +49,8 @@ static void	ant_step(t_rlist *room, t_data *data, int *in_way)
 	if (room->next != NULL)
 	{
 		ant_step(room->next, data, in_way);
-		if ((room->next->next == NULL || room->next->ant == 0) && room->ant != 0)
+		if ((room->next->next == NULL
+			|| room->next->ant == 0) && room->ant != 0)
 		{
 			if (data->space == 1)
 				write(1, " ", 1);
@@ -59,7 +60,7 @@ static void	ant_step(t_rlist *room, t_data *data, int *in_way)
 			room->next->ant = room->ant;
 			room->ant = 0;
 			*in_way = 1;
-			return;
+			return ;
 		}
 	}
 }
@@ -67,7 +68,7 @@ static void	ant_step(t_rlist *room, t_data *data, int *in_way)
 static void	calc_profit(t_paths *group)
 {
 	int		i;
-	int 	len0;
+	int		len0;
 
 	i = 0;
 	len0 = group->len;
@@ -81,8 +82,8 @@ static void	calc_profit(t_paths *group)
 
 void		lem_in(t_data *data)
 {
-	int 	ant;
-	int 	in_way;
+	int		ant;
+	int		in_way;
 	t_paths	*path;
 
 	calc_profit(data->group);

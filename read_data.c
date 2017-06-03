@@ -12,41 +12,22 @@
 
 #include "lemin.h"
 
-static int		try_add(char *str, int type, t_data *data)
+static void		try_add_2(char *str, int type, t_data *data, char *command)
 {
-	static int	curr = 0;
-	static char	*command = NULL;
-
-	if (type == ANTNUM)
+	if (type == ROOM)
 	{
-		if (curr != 0)
-			exit_error(data);
-		if (ft_strequ(command, "start") || ft_strequ(command, "end"))
-			exit_error(data);
-		data->antnum = ft_atoi_exit(str);
-		if (data->antnum == 0)
-			exit_error(data);
-		curr++;
-	}
-	else if (type == COMMAND)
-	{
-		command = add_command(str, command);
-		return (42);
-	}
-	else if (type == ROOM)
-	{
-		if (curr != 1)
+		if (data->curr != 1)
 			exit_error(data);
 		add_room(data, str, command);
 	}
 	else if (type == JOIN)
 	{
-		if (curr == 1)
+		if (data->curr == 1)
 		{
-			curr = 2;
+			data->curr = 2;
 			add_names(data);
 		}
-		if (curr != 2)
+		if (data->curr != 2)
 			exit_error(data);
 		add_join(data, str, command);
 	}
@@ -55,14 +36,38 @@ static int		try_add(char *str, int type, t_data *data)
 		if (command != 0)
 			exit_error(data);
 	}
-	(command) ? (free(command)) : (0);
-	command = 0;
-	return (curr);
 }
 
-static void join(t_data *data, char *str)
+static int		try_add(char *str, int type, t_data *data)
 {
-	char	*todel;
+	static char	*command = NULL;
+
+	if (type == ANTNUM)
+	{
+		if (data->curr != 0)
+			exit_error(data);
+		if (ft_strequ(command, "start") || ft_strequ(command, "end"))
+			exit_error(data);
+		data->antnum = ft_atoi_exit(str);
+		if (data->antnum == 0)
+			exit_error(data);
+		data->curr += 1;
+	}
+	else if (type == COMMAND)
+	{
+		command = add_command(str, command);
+		return (42);
+	}
+	else
+		try_add_2(str, type, data, command);
+	(command) ? (free(command)) : (0);
+	command = 0;
+	return (data->curr);
+}
+
+static void		join(t_data *data, char *str)
+{
+	char		*todel;
 
 	todel = data->input;
 	data->input = ft_strjoin(data->input, str);
@@ -72,10 +77,10 @@ static void join(t_data *data, char *str)
 	(todel) ? (free(todel)) : (0);
 }
 
-static void	read_input(t_data *data, int fd)
+static void		read_input(t_data *data, int fd)
 {
-	char	*temp;
-	int		step;
+	char		*temp;
+	int			step;
 
 	temp = 0;
 	step = -1;
@@ -92,11 +97,12 @@ static void	read_input(t_data *data, int fd)
 	}
 }
 
-void		read_data(int fd)
+void			read_data(int fd)
 {
-	t_data	*data;
+	t_data		*data;
 
 	data_init(&data);
+	data->curr = 0;
 	read_input(data, fd);
 	find_all_paths(data);
 	ft_putendl(data->input);

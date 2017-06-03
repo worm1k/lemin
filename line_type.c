@@ -30,7 +30,7 @@ static int	isjoin(char *str)
 	int		j;
 
 	i = 0;
-	if (ft_isprint(str[i]) && str[i] != ' ' && str[i] != '#' 
+	if (ft_isprint(str[i]) && str[i] != ' ' && str[i] != '#'
 		&& str[i] != 'L' && str[i] != '-')
 		i++;
 	else
@@ -40,7 +40,7 @@ static int	isjoin(char *str)
 	if (str[i++] != '-')
 		return (0);
 	j = i;
-	if (ft_isprint(str[i]) && str[i] != ' ' && str[i] != '#' 
+	if (ft_isprint(str[i]) && str[i] != ' ' && str[i] != '#'
 		&& str[i] != 'L' && str[i] != '-')
 		i++;
 	else
@@ -58,7 +58,8 @@ static int	isroom(char *str)
 	int		j;
 
 	i = 0;
-	if (ft_isprint(str[i]) && str[i] != ' ' && str[i] != '#' && str[i] != 'L' && str[i] != '-')
+	if (ft_isprint(str[i]) && str[i] != ' ' && str[i] != '#'
+		&& str[i] != 'L' && str[i] != '-')
 		i++;
 	else
 		return (0);

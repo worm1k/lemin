@@ -15,7 +15,7 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 
-enum 				e_line
+enum				e_line
 {
 	COMMENT = 0,
 	COMMAND,
@@ -32,27 +32,28 @@ typedef struct		s_rooms
 	struct s_rooms	*next;
 }					t_rooms;
 
-typedef struct 		s_rlist
+typedef struct		s_rlist
 {
-	int 			index;
-	int 			ant;
+	int				index;
+	int				ant;
 	struct s_rlist	*next;
 }					t_rlist;
 
-typedef struct 		s_paths
+typedef struct		s_paths
 {
-	int 			len;
+	int				len;
 	char			visited;
-	int 			profit;
+	int				profit;
 	t_rlist			*head;
 	struct s_paths	*next;
 }					t_paths;
 
 typedef struct		s_data
 {
+	int				curr;
 	int				antnum;
 	int				roomsnum;
-	int 			space;
+	int				space;
 	t_rooms			*rooms;
 	t_rooms			*start;
 	t_rooms			*end;
@@ -61,7 +62,7 @@ typedef struct		s_data
 	t_paths			*paths;
 	t_paths			*group;
 	char			*visited;
-	char 			*input;
+	char			*input;
 }					t_data;
 
 void				read_data(int fd);
@@ -80,7 +81,12 @@ void				room_add_end(t_data *data, t_rooms *room);
 void				join_add(t_data *data, char *join1, char *join2);
 void				matrix_init(t_data *data);
 void				find_all_paths(t_data *data);
-void		        find_path_group(t_data *data);
+void				cpy_path(t_rlist **dst, t_rlist *src);
+void				cre_path(t_paths **ps, t_paths *n, t_rlist *path, int len);
+void				find_path_group(t_data *data);
+void				add_path(t_paths **dst, t_paths *src);
+float				average_moves_num(t_paths *path, int antnum);
+void				del_path(t_paths **path, t_paths *value);
 void				lem_in(t_data *data);
 void				ft_destruct(t_data *data);
 #endif

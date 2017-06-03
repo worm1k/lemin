@@ -24,13 +24,13 @@ static void	ft_delgroup(t_paths *group)
 	}
 }
 
-static void ft_delpaths(t_paths *paths)
+static void	ft_delpaths(t_paths *paths)
 {
-    t_paths	*curr;
-    t_paths *ctmp;
+	t_paths	*curr;
+	t_paths	*ctmp;
 	t_rlist	*room;
-	t_rlist *rtmp;
-	
+	t_rlist	*rtmp;
+
 	curr = paths;
 	while (curr)
 	{
@@ -47,11 +47,11 @@ static void ft_delpaths(t_paths *paths)
 	}
 }
 
-static void ft_del2dchar(t_data *data)
+static void	ft_del2dchar(t_data *data)
 {
-    int     i;
-    
-    i = 0;
+	int		i;
+
+	i = 0;
 	if (data->matrix != NULL && data->names != NULL)
 	{
 		while (i < data->roomsnum)
@@ -65,29 +65,30 @@ static void ft_del2dchar(t_data *data)
 	}
 }
 
-static void ft_delrooms(t_rooms *room)
+static void	ft_delrooms(t_rooms *room)
 {
-    t_rooms *todel;
+	t_rooms	*todel;
 
-    while (room)
-    {
+	while (room)
+	{
 		todel = room;
 		room = room->next;
 		(todel->name) ? (free(todel->name)) : (0);
 		free(todel);
-    }
+	}
 }
 
-void        ft_destruct(t_data *data)
+void		ft_destruct(t_data *data)
 {
 	if (data == NULL)
 		return ;
-    ft_delrooms(data->rooms);
-    ft_delrooms(data->end);
-    ft_delrooms(data->start);
-    ft_del2dchar(data);
-    ft_delpaths(data->paths);
+	(data->input) ? (free(data->input)) : (0);
+	ft_delrooms(data->rooms);
+	ft_delrooms(data->end);
+	ft_delrooms(data->start);
+	ft_del2dchar(data);
+	ft_delpaths(data->paths);
 	ft_delgroup(data->group);
 	(data->visited) ? (free(data->visited)) : (0);
-    free(data);
+	free(data);
 }

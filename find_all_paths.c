@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_all_pathes.c                                  :+:      :+:    :+:   */
+/*   find_all_paths.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,32 +12,7 @@
 
 #include "lemin.h"
 
-static void cpy_path(t_rlist **dst, t_rlist *src)
-{
-	t_rlist	*temp;
-	
-	while (src)
-	{
-		temp = (t_rlist *)malloc(sizeof(t_rlist));
-		temp->index = src->index;
-		temp->ant = 0;
-		temp->next = *dst;
-		*dst = temp;
-		src = src->next;
-	}
-}
-
-static void	cre_path(t_paths **paths, t_paths *next, t_rlist *path, int len)
-{
-	*paths = (t_paths *)malloc(sizeof(t_paths));
-	(*paths)->visited = 0;
-	(*paths)->len = len;
-	(*paths)->next = next;
-	(*paths)->head = NULL;
-	cpy_path(&(*paths)->head, path);
-}
-
-static void	add_path(t_data *data, t_rlist *path, int len)
+static void	push_path(t_data *data, t_rlist *path, int len)
 {
 	t_paths	*curr;
 
@@ -46,7 +21,6 @@ static void	add_path(t_data *data, t_rlist *path, int len)
 	curr = data->paths;
 	if (len <= curr->len)
 		return (cre_path(&data->paths, data->paths, path, len));
-	// NOT useless code, it happens
 	while (curr->next)
 	{
 		if (curr->len <= len && len <= curr->next->len)
@@ -59,7 +33,7 @@ static void	add_path(t_data *data, t_rlist *path, int len)
 static void	pop_room(t_rlist **path)
 {
 	t_rlist	*temp;
-	
+
 	temp = (*path)->next;
 	free(*path);
 	*path = temp;
@@ -88,7 +62,7 @@ static void	can_traverse(t_data *data, int start, t_rlist **path, int len)
 			if (i == data->roomsnum - 1)
 			{
 				push_room(i, path);
-				add_path(data, *path, len);
+				push_path(data, *path, len);
 				pop_room(path);
 			}
 			else if (!data->visited[i])

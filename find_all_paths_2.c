@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_add.c                                         :+:      :+:    :+:   */
+/*   find_all_paths_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,32 +12,27 @@
 
 #include "lemin.h"
 
-static int	index_of(t_data *data, char *str)
+void		cpy_path(t_rlist **dst, t_rlist *src)
 {
-	int		res;
+	t_rlist	*temp;
 
-	res = 0;
-	while (res < data->roomsnum)
+	while (src)
 	{
-		if (ft_strequ(str, data->names[res]))
-		{
-			return (res);
-		}
-		res++;
+		temp = (t_rlist *)malloc(sizeof(t_rlist));
+		temp->index = src->index;
+		temp->ant = 0;
+		temp->next = *dst;
+		*dst = temp;
+		src = src->next;
 	}
-	exit_error(data);
-	return (42);
 }
 
-void		join_add(t_data *data, char *join1, char *join2)
+void		cre_path(t_paths **ps, t_paths *n, t_rlist *path, int len)
 {
-	int		i;
-	int		j;
-
-	i = index_of(data, join1);
-	j = index_of(data, join2);
-	if (data->matrix[i][j] || data->matrix[j][i])
-		exit_error(data);
-	data->matrix[i][j] = 1;
-	data->matrix[j][i] = 1;
+	*ps = (t_paths *)malloc(sizeof(t_paths));
+	(*ps)->visited = 0;
+	(*ps)->len = len;
+	(*ps)->next = n;
+	(*ps)->head = NULL;
+	cpy_path(&(*ps)->head, path);
 }
